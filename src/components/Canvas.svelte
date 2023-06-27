@@ -71,7 +71,7 @@
   
 
   
-  <button on:click={changeLineWidth}>Change Line Width</button>
+  <button on:click={changeLineWidth}>Change brush width</button>
 <canvas
 				{width}
 				{height}
