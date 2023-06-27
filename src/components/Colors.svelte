@@ -1,54 +1,74 @@
-<script>
+<script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
-	
+
 	export let colors = [
 		'#d58141',
 		'#d7c44c',
 		'#4fa9cc',
 		'#3f8d27',
 		'#990099',
-	]
-	//TODO implement button to add colors
+	];
+
+	export let paletteColor;
+	export let background = '#fff';
+
+	function addColor() {
+		const newColor = prompt('Enter a new color:');
+		if (newColor) {
+			colors = [...colors, newColor];
+		}
+	}
+
 	
-	export let paletteColor
-	export let background = '#fff'
+
+	import ColorPicker from 'svelte-awesome-color-picker';
+	import Rgb from "svelte-awesome-color-picker"
+	let rgb = Rgb; // or hsv or hex
 </script>
 
 <section>
 	<div>
+		
 		{#each colors as color}
-		<button 
-						on:click="{() => {
-							dispatch('color', { color })
-							paletteColor = color
-						}}"
-						style:background={color}>
-			<span class="visually-hidden">
-				Select the color {color}
-			</span>
-		</button>
+			<button 
+				on:click={() => {
+					dispatch('color', { color });
+					paletteColor = color;
+				}}
+				style:background={color}>
+				<span class="visually-hidden">
+					Select the color {color}
+				</span>
+			</button>
 		{/each}
+		
+		<button on:click={addColor} style:background>
+			
+			<span class="visually-hidden">
+				Add a new color
+			</span>
+			+
+		</button>
 	</div>
-	
+
 	<button 
-					on:click={() => {
-						dispatch('color', { color: background })
-						paletteColor = background
-					}}
-					style:background>
+		on:click={() => {
+			dispatch('color', { color: background });
+			paletteColor = background;
+		}}
+		style:background>
 		<span class="visually-hidden">
 			Select the background color to clear the canvas
 		</span>
 	</button>
-	
+
 	<svg style:color={paletteColor} viewBox="-50 -50 100 100">
 		<g fill="currentColor" stroke="currentColor" stroke-width="0" stroke-linecap="round">
-			<path d="M -38 12 a 38 38 0 0 0 76 0 q 0 -28 -38 -62 -38 34 -38 62" />
+				<path d="M -38 12 a 38 38 0 0 0 76 0 q 0 -28 -38 -62 -38 34 -38 62" />
 		</g>
 	</svg>	
 </section>
-	
 
 <style>
 	section {
