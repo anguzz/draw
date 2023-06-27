@@ -38,6 +38,8 @@
 		justify-content: center;
 		align-items: center;
 		background: #375082;
+        overflow: hidden; /* Prevent scrolling, bad thing is if resize too large hard to see other buttons */
+
 	}
 	
 	:global(.visually-hidden:not(:focus):not(:active)) {
