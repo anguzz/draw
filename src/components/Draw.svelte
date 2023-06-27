@@ -30,6 +30,13 @@
 </main>
 
 <style>	
+
+
+	:global(html) {
+		margin: 0;
+		padding: 0;
+		overflow: hidden; /* Prevent scrolling */
+	}
 	:global(body) {
 		margin: 0;
 		padding: 0;
